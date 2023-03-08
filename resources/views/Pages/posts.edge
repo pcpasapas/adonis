@@ -1,0 +1,33 @@
+@layout('Layouts/default')
+
+@set('title', 'Posts')
+
+@section('content')
+@each(categorie in categories)
+<ul>
+    <li>
+        {{ categorie.name }}
+        {{ categorie.createdAt.toFormat('le dd/MM/yyyy à HH:mm') }}
+        <form method="post" action="{{ route('CategoriesController.delete') }}">
+            <input type="hidden" name="categorie" value="{{categorie.id}}" />
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+
+    </li>
+</ul>
+
+@end
+
+
+<h1>Test Posts.index</h1>
+<button class="btn btn-primary">Test Bootstrap</button>
+
+<form method="post">
+    @if(flashMessages.has('errors'))
+    {{ inspect(flashMessages.all()) }}
+    {{ flashMessages.get('errors.name') }}
+    @end
+    <input name="name" type="text" />
+    <button class="btn btn-primary">Envoyer</button>
+</form>
+@end
