@@ -1,5 +1,4 @@
 import Env from '@ioc:Adonis/Core/Env'
-import Application from '@ioc:Adonis/Core/Application'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
 
 const databaseConfig: DatabaseConfig = {
@@ -16,20 +15,18 @@ const databaseConfig: DatabaseConfig = {
   connection: Env.get('DB_CONNECTION'),
 
   connections: {
-    sqlite: {
-      client: 'sqlite',
+    mysql: {
+      client: 'mysql2',
       connection: {
-        filename: Application.tmpPath('db.sqlite3'),
-      },
-      pool: {
-        afterCreate: (conn, cb) => {
-          conn.run('PRAGMA foreign_keys=true', cb)
-        },
+        host: Env.get('MYSQL_HOST'),
+        port: Env.get('MYSQL_PORT'),
+        user: Env.get('MYSQL_USER'),
+        password: Env.get('MYSQL_PASSWORD', ''),
+        database: Env.get('MYSQL_DB_NAME'),
       },
       migrations: {
         naturalSort: true,
       },
-      useNullAsDefault: true,
       healthCheck: false,
       debug: false,
     },
