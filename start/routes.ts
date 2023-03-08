@@ -26,3 +26,9 @@ Route.get('posts', 'PagesController.posts')
 Route.post('posts', 'PagesController.new')
 
 Route.post('post/delete', 'CategoriesController.delete')
+
+Route.post('logout', 'SecurityController.logout')
+Route.post('register', 'SecurityController.register')
+Route.post('login', 'SecurityController.login')
+
+Route.get('admin', 'AdminController.index').middleware(['auth', 'admin'])

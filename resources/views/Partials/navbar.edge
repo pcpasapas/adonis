@@ -20,16 +20,27 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/posts">Posts</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
             </ul>
             <!-- Left links -->
 
+
             <div class="d-flex align-items-center">
+                @if (auth.isLoggedIn)
+                <p class="me-2"> {{ auth.user.email }} </p>
+                <form method="post" action="{{ route('SecurityController.logout')}}">
+                    <button type="submit" class="btn btn-danger">Se déconnecter</button>
+                </form>
+                @else
                 <button type="button" class="btn btn-link px-3 me-2">
                     Se connecter
                 </button>
                 <button type="button" class="btn btn-primary me-3">
                     Créer un compte
                 </button>
+                @end
             </div>
         </div>
         <!-- Collapsible wrapper -->

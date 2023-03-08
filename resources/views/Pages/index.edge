@@ -3,7 +3,14 @@
 @set('title', 'Accueil')
 
 @section('content')
+@if (auth.isLoggedIn)
+<p> Hello {{ auth.user.email }} </p>
 
-<h1>Test Index</h1>
-<button class="btn btn-primary">Test Bootstrap</button>
+<form method="post" action="{{ route('SecurityController.logout')}}">
+    <button type="submit" class="btn btn-danger">Se déconnecter</button>
+</form>
+@else
+@include('Partials/login')
+{{-- @include('Partials/register') --}}
+@end
 @end

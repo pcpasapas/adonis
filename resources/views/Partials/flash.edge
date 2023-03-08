@@ -1,0 +1,5 @@
+@if( flashMessages.has('errors') )
+@each(message in flashMessages.get('errors'))
+<p class="alert alert-danger">{{ message }}</p>
+@end
+@end

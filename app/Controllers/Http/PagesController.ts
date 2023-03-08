@@ -2,7 +2,8 @@ import Category from 'App/Models/Category'
 import CategoryValidator from 'App/Validators/CategoryValidator'
 
 export default class PagesController {
-  public async index({ view }) {
+  public async index({ view, auth }) {
+    await auth.use('web').check()
     return view.render('Pages/index')
   }
 
